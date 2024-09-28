@@ -373,7 +373,7 @@ export default {
   com_nav_clear_conversation: 'Удалить чаты',
   com_nav_clear_conversation_confirm_message:
     'Вы уверены, что хотите удалить все чаты? Это действие нельзя отменить.',
-  com_nav_help_faq: 'Помощь и Вопросы',
+  com_nav_help_faq: 'Помощь',
   com_nav_settings: 'Настройки',
   com_nav_search_placeholder: 'Поиск сообщений',
   com_nav_info_bookmarks_rebuild:

@@ -11,6 +11,7 @@ WORKDIR /app
 USER node
 
 COPY --chown=node:node . .
+#COPY --chown=node:node client/public/assets/logo.svg client/public/assets/logo1.svg client/public/assets/apple-touch-icon-180x180.png client/public/assets/favicon-16x16.png client/public/assets/favicon-32x32.png client/public/assets/maskable-icon.png /app/client/public/assets/
 
 RUN \
     # Allow mounting of these files, which have no default
