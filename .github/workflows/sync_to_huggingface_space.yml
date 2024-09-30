@@ -15,4 +15,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push -f https://Ramya0301:$HF_TOKEN@huggingface.co/spaces/studentunsw/EZChat main
+        run: git push -f https://studentunsw:$HF_TOKEN@huggingface.co/spaces/studentunsw/EZChat main
