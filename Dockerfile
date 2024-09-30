@@ -1,42 +1,17 @@
-# v0.7.5-rc2
+FROM ghcr.io/danny-avila/librechat-dev:latest
 
-# Base node image
-FROM node:20-alpine AS node
+# Copy your project files
+COPY . /app
 
-RUN apk --no-cache add curl
-
-RUN mkdir -p /app && chown node:node /app
+# Set the working directory
 WORKDIR /app
 
-USER node
+# Install any additional dependencies if needed
+# RUN npm install
 
-COPY --chown=node:node . .
-#COPY --chown=node:node client/public/assets/logo.svg client/public/assets/logo1.svg client/public/assets/apple-touch-icon-180x180.png client/public/assets/favicon-16x16.png client/public/assets/favicon-32x32.png client/public/assets/maskable-icon.png /app/client/public/assets/
-
-RUN \
-    # Allow mounting of these files, which have no default
-    touch .env ; \
-    # Create directories for the volumes to inherit the correct permissions
-    mkdir -p /app/client/public/images /app/api/logs ; \
-    npm config set fetch-retry-maxtimeout 600000 ; \
-    npm config set fetch-retries 5 ; \
-    npm config set fetch-retry-mintimeout 15000 ; \
-    npm install --no-audit; \
-    # React client build
-    NODE_OPTIONS="--max-old-space-size=2048" npm run frontend; \
-    npm prune --production; \
-    npm cache clean --force
-
-RUN mkdir -p /app/client/public/images /app/api/logs
-
-# Node API setup
+# Expose the port your app runs on
 EXPOSE 3080
-ENV HOST=0.0.0.0
-CMD ["npm", "run", "backend"]
 
-# Optional: for client with nginx routing
-# FROM nginx:stable-alpine AS nginx-client
-# WORKDIR /usr/share/nginx/html
-# COPY --from=node /app/client/dist /usr/share/nginx/html
-# COPY client/nginx.conf /etc/nginx/conf.d/default.conf
-# ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Start the application
+CMD ["npm", "start"]
+
